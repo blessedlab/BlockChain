@@ -4,6 +4,7 @@ mod mining;
 mod transaction;
 mod wallet;
 
+use block::Block;
 use blockchain::Blockchain;
 use transaction::Transaction;
 use wallet::Wallet;
@@ -77,6 +78,7 @@ fn main() {
     ///Demonstration of mining first block
     println!("Mining the first block...");
     bc.mine_pending_transactions(miner_wallet.address.clone());
+    Block::print_merkle_tree(&bc.last_block().transactions);
     println!();
 
 
@@ -102,6 +104,7 @@ fn main() {
 
     println!("\nMining second block...");
     bc.mine_pending_transactions(miner_wallet.address.clone());
+    Block::print_merkle_tree(&bc.last_block().transactions);
     println!();
 
 

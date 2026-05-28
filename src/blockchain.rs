@@ -32,7 +32,6 @@ impl Blockchain {
             public_keys: HashMap::new(),
         };
 
-
         ///gifting coins to the blockchain creator
         bc.balances.insert("genesis_address".to_string(), 1_000_000.0);
 
@@ -40,7 +39,6 @@ impl Blockchain {
     }
 
     pub fn last_block(&self) -> &Block {
-        // unwrap безопасен: цепь всегда содержит хотя бы genesis-блок
         self.chain.last().unwrap()
     }
 
@@ -56,7 +54,6 @@ impl Blockchain {
 
     ///add transactions to mempool
     pub fn add_transaction(&mut self, tx: Transaction) -> Result<(), String> {
-        // Coinbase-транзакции добавляются только майнером
         if tx.is_coinbase() {
             return Err("Cannot manually add coinbase transactions".to_string());
         }
